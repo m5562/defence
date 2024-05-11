@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(./assets/MaterialIconsRoundRegular.otf); /* For IE6-8 */
+}
+.icon {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .input {
+    text-wrap: balance;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding: 6px 12px;
+  }
+  .input:focus {
+    outline: rgb(123, 2, 210);
+    box-shadow: 0 0 0 0.2rem rgba(123, 2, 210, 0.25);
+  }
+}
