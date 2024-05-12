@@ -622,16 +622,17 @@ video {
   margin-right: auto;
 }
 
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
 
 .mb-6 {
   margin-bottom: 1.5rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .mt-2 {
@@ -663,20 +664,12 @@ video {
   height: 100dvh;
 }
 
-.max-h-96 {
-  max-height: 24rem;
-}
-
 .w-\[clamp\(300px\2c 90\%\2c 400px\)\] {
   width: clamp(300px,90%,400px);
 }
 
 .w-full {
   width: 100%;
-}
-
-.grow {
-  flex-grow: 1;
 }
 
 .flex-col {

@@ -18,6 +18,16 @@ const Content = () => {
   }, []);
 
   useEffect(() => {
+    if (uri[lang][ageGroup]?.length == videoIndex + 1) {
+      setVideoIndex(0);
+    }
+
+    if (videoIndex == 0) {
+      setVideoIndex(0);
+    }
+  }, [videoIndex]);
+
+  useEffect(() => {
     const age = JSON.parse(localStorage.getItem("user")).age;
     if (age > 35) {
       setAgeGroup("olderAdults");
@@ -35,13 +45,14 @@ const Content = () => {
       `https://www.youtube.com/embed/${uri[lang][ageGroup]?.[videoIndex]}?controls=0`
     );
   }, [lang, ageGroup, videoIndex]);
+  console.log(uri[lang][ageGroup]);
 
   const handleSignOut = async () => {
     localStorage.clear();
     navigate("/login");
   };
 
-  console.log(uri[lang]);
+  // console.log(uri[lang]);
   return (
     <>
       <div className="h-dvh flex justify-center items-center p-4 flex-col container mx-auto">
@@ -68,19 +79,26 @@ const Content = () => {
         <span>This is for {ageText}</span>
         <div className="flex mt-2">
           <button
-            className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50 mr-2"
+            disabled={videoIndex == 0}
+            className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50"
+            onClick={() => {
+              if (videoIndex != 0) {
+                setVideoIndex(videoIndex - 1);
+                setLink(
+                  `https://www.youtube.com/embed/${uri[lang][ageGroup][videoIndex]}`
+                );
+              }
+            }}
+          >
+            Previous
+          </button>
+          <button
+            className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50 mx-2"
             onClick={handleSignOut}
           >
             Sign out
           </button>
-          <button
-            className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50 mr-2"
-            onClick={() => {
-              navigate("/more");
-            }}
-          >
-            Read more
-          </button>
+
           <button
             className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50"
             onClick={() => {
