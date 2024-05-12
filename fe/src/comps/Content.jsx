@@ -8,6 +8,7 @@ const Content = () => {
   const [lang, setLang] = useState("english");
   const [ageGroup, setAgeGroup] = useState("");
   const [link, setLink] = useState("oxBuWZtjl0U");
+  const [ageText, setAgeText] = useState("");
 
   useEffect(() => {
     const data = localStorage.getItem("user");
@@ -18,21 +19,21 @@ const Content = () => {
 
   useEffect(() => {
     const age = JSON.parse(localStorage.getItem("user")).age;
-    if (age > 45) {
+    if (age > 35) {
       setAgeGroup("olderAdults");
+      setAgeText("older adults");
     } else {
-      if (age >19) {
+      if (age > 19) {
         setAgeGroup("youngerAdults");
+        setAgeText("younger adults");
       } else {
         setAgeGroup("kids");
+        setAgeText("kids");
       }
     }
-    const run = () => {
-      setLink(
-        `https://www.youtube.com/embed/${uri[lang][ageGroup]?.[videoIndex]}?controls=0`
-      );
-    };
-    run();
+    setLink(
+      `https://www.youtube.com/embed/${uri[lang][ageGroup]?.[videoIndex]}?controls=0`
+    );
   }, [lang, ageGroup, videoIndex]);
 
   const handleSignOut = async () => {
@@ -40,7 +41,7 @@ const Content = () => {
     navigate("/login");
   };
 
-
+  console.log(uri[lang]);
   return (
     <>
       <div className="h-dvh flex justify-center items-center p-4 flex-col container mx-auto">
@@ -55,17 +56,16 @@ const Content = () => {
           <option value="english">English</option>
           <option value="hindi">Hindi</option>
         </select>
-        {
-          <iframe
-            className="rounded-lg aspect-video w-full"
-            src={link}
-            title="FRIENDS"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-            controls="0"
-          ></iframe>
-        }
+        <iframe
+          className="rounded-lg aspect-video w-full"
+          src={link}
+          title="FRIENDS"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+          controls="0"
+        ></iframe>
+        <span>This is for {ageText}</span>
         <div className="flex mt-2">
           <button
             className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50 mr-2"
