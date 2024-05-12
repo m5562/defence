@@ -28,7 +28,8 @@ const Content = () => {
   }, [videoIndex]);
 
   useEffect(() => {
-    const age = JSON.parse(localStorage.getItem("user")).age;
+    const age = JSON.parse(localStorage.getItem("user")).age ;
+
     if (age > 35) {
       setAgeGroup("olderAdults");
       setAgeText("older adults");
@@ -37,15 +38,18 @@ const Content = () => {
         setAgeGroup("youngerAdults");
         setAgeText("younger adults");
       } else {
-        setAgeGroup("kids");
+        setAgeGroup("kid");
         setAgeText("kids");
       }
     }
+  }, []);
+
+  useEffect(() => {
     setLink(
-      `https://www.youtube.com/embed/${uri[lang][ageGroup]?.[videoIndex]}?controls=0`
+      `https://www.youtube.com/embed/${uri[lang][ageGroup]?.[videoIndex]}`
     );
-  }, [lang, ageGroup, videoIndex]);
-  console.log(uri[lang][ageGroup]);
+    console.log(uri[lang])
+  }, [lang,ageGroup, videoIndex]);
 
   const handleSignOut = async () => {
     localStorage.clear();
@@ -84,9 +88,6 @@ const Content = () => {
             onClick={() => {
               if (videoIndex != 0) {
                 setVideoIndex(videoIndex - 1);
-                setLink(
-                  `https://www.youtube.com/embed/${uri[lang][ageGroup][videoIndex]}`
-                );
               }
             }}
           >
@@ -103,9 +104,6 @@ const Content = () => {
             className="bg-blue-gem-500 px-4 py-2 rounded-md font-bold text-blue-gem-50"
             onClick={() => {
               setVideoIndex(videoIndex + 1);
-              setLink(
-                `https://www.youtube.com/embed/${uri[lang][ageGroup][videoIndex]}`
-              );
             }}
           >
             Next
