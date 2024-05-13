@@ -56,15 +56,16 @@ const Content = () => {
     navigate("/login");
   };
 
-  // console.log(uri[lang]);
+  console.log(uri[lang], ageGroup);
   return (
     <>
       <div className="h-dvh flex justify-center items-center p-4 flex-col container mx-auto">
         <select
           id="ageGroup"
-          defaultValue={ageGroup}
+          value={ageGroup}
           onChange={(e) => {
             setAgeGroup(e.target.value);
+            setAgeText("");
           }}
         >
           <option disabled={true}>select age group</option>
@@ -92,7 +93,7 @@ const Content = () => {
           allowFullScreen
           controls="0"
         ></iframe>
-        <span>This is for {ageText}</span>
+        {ageText && <span>This is for {`${ageText}`}</span>}
         <div className="flex mt-2">
           <button
             disabled={videoIndex == 0}
