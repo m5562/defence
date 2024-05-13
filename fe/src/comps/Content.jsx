@@ -13,7 +13,7 @@ const Content = () => {
   useEffect(() => {
     const data = localStorage.getItem("user");
     if (!JSON.parse(data)) {
-      navigate("/login");
+      navigate("/");
     }
   }, []);
 

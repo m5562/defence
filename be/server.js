@@ -126,6 +126,13 @@ app.post("/admin/login", async (req, res) => {
 //   res.send(data);
 // });
 
+app.get("/admin/getAll", async (req, res) => {
+  const data = await userschema.find();
+  if (data) {
+    res.send(data);
+  }
+});
+
 app.listen(5000, () => {
   console.log("express: 5000");
 });

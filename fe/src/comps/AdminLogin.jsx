@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import appLogo from "./../assets/consent.jpg";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate
+  const navigate = useNavigate()
 
   const handleSignin = () => {
     axios
@@ -23,7 +24,7 @@ const AdminLogin = () => {
         }
       })
       .catch((e) => {
-        console.log(e.responce);
+        console.log(e);
       });
   };
   return (
