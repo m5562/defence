@@ -7,6 +7,8 @@ import Home from "./comps/Home";
 import Register from "./comps/Register";
 import Content from "./comps/Content";
 import Morepage from "./comps/Morepage";
+import AdminLogin from "./comps/AdminLogin";
+import AdminDashboard from "./comps/AdminDashboard";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/register" element={<Register />} />
         <Route path="/content" element={<Content />} />
         <Route path="/more" element={<Morepage />} />

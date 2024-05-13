@@ -11,6 +11,12 @@ const user = mongoose.Schema({
     age: Number
 })
 
-const userschema = mongoose.model("Users", user)
+const admin = mongoose.Schema({
+    username: String,
+    password: String
+})
 
-export { userschema }
+const userschema = mongoose.model("Users", user)
+const adminSchema = mongoose.model("Admin", admin)
+
+export { userschema, adminSchema }

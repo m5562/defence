@@ -1,25 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import appLogo from "./../assets/consent.jpg";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+const AdminLogin = () => {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("user"));
-    if (data?.email) {
-      navigate("/content");
-    }
-  }, []);
+  const navigate = useNavigate
 
   const handleSignin = () => {
     axios
-      .post("http://localhost:5000/login", {
-        email,
+      .post("http://localhost:5000/admin/login", {
+        username,
         password,
       })
       .then((res) => {
@@ -27,8 +19,7 @@ const Login = () => {
         if (res.data?.error) {
           setError(res.data.error.msg);
         } else {
-          localStorage.setItem("user", JSON.stringify(res.data));
-          navigate("/content");
+          navigate("/admin/dashboard");
         }
       })
       .catch((e) => {
@@ -40,7 +31,7 @@ const Login = () => {
       <div className="rounded-2xl border border-solid border-stone-300 w-[clamp(300px,90%,400px)]">
         <div className="flex flex-col p-4 items-center">
           <img src={appLogo} className="rounded-full mb-4 size-24" />
-          <h1 className="mb-6 font-bold text-xl">Sign in to your account</h1>
+          <h1 className="mb-6 font-bold text-xl">Admin login</h1>
           <div className="flex w-full flex-col mb-4">
             <label htmlFor="username">E-mail</label>
             <input
@@ -48,9 +39,9 @@ const Login = () => {
               id="username"
               className="input"
               onChange={(e) => {
-                setEmail(e.target.value);
+                setUsername(e.target.value);
               }}
-              defaultValue={email}
+              defaultValue={username}
             />
           </div>
           <div className="flex w-full flex-col mb-4">
@@ -74,18 +65,10 @@ const Login = () => {
           <div className="mt-4 text-sm text-red-500">
             {error && <div>{error}</div>}
           </div>
-          <div className="mt-4">
-            <Link
-              to={"/register"}
-              className="hover:underline text-blue-gem-600"
-            >
-              Create new account.
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

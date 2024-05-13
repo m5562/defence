@@ -1,12 +1,14 @@
 import express from "express";
-import { userschema } from "./schemas.js";
+import { userschema, adminSchema } from "./schemas.js";
 import cors from "cors";
 
 const app = express();
 
-app.use(cors({
-  origin:"http://localhost:5173"
-}));
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 app.use(express.json());
 
 function calculateAge(dateOfBirth) {
@@ -94,7 +96,7 @@ app.post("/login", async (req, res) => {
       });
     }
   } else {
-    res.status(200  ).send({
+    res.status(200).send({
       error: {
         code: 498,
         msg: "All fields are mandatory.",
@@ -102,6 +104,27 @@ app.post("/login", async (req, res) => {
     });
   }
 });
+
+app.post("/admin/login", async (req, res) => {
+  const { username, password } = req.body;
+  const admin = await adminSchema.findOne({ username });
+  if (admin && username == admin.username && password == admin.password) {
+    res.status(201).send({ msg: "admin login successfully.", data: admin });
+  } else {
+    res.status(300).send("something went wrong.");
+  }
+});
+
+// app.post("/admin/login/add", async (req, res) => {
+//   const { username, password } = req.body;
+//   const admin = new adminSchema({
+//     username,
+//     password,
+//   });
+
+//   const data = await admin.save();
+//   res.send(data);
+// });
 
 app.listen(5000, () => {
   console.log("express: 5000");

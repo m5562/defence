@@ -28,7 +28,7 @@ const Content = () => {
   }, [videoIndex]);
 
   useEffect(() => {
-    const age = JSON.parse(localStorage.getItem("user")).age ;
+    const age = JSON.parse(localStorage.getItem("user")).age;
 
     if (age > 35) {
       setAgeGroup("olderAdults");
@@ -48,8 +48,8 @@ const Content = () => {
     setLink(
       `https://www.youtube.com/embed/${uri[lang][ageGroup]?.[videoIndex]}`
     );
-    console.log(uri[lang])
-  }, [lang,ageGroup, videoIndex]);
+    console.log(uri[lang]);
+  }, [lang, ageGroup, videoIndex]);
 
   const handleSignOut = async () => {
     localStorage.clear();
@@ -61,11 +61,23 @@ const Content = () => {
     <>
       <div className="h-dvh flex justify-center items-center p-4 flex-col container mx-auto">
         <select
+          id="ageGroup"
+          defaultValue={ageGroup}
+          onChange={(e) => {
+            setAgeGroup(e.target.value);
+          }}
+        >
+          <option disabled={true}>select age group</option>
+          <option value="olderAdults">Older Adults</option>
+          <option value="youngerAdults">Younger Adults</option>
+          <option value="kid">kids</option>
+        </select>
+
+        <select
           id="language"
           defaultValue={lang}
           onChange={(e) => {
             setLang(e.target.value);
-            setLink(link);
           }}
         >
           <option value="english">English</option>
